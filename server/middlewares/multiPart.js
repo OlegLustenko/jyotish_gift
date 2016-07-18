@@ -5,7 +5,7 @@ export default function () {
   return async function (ctx, next) {
 
     if (!ctx.request.is('multipart/*')) {
-      console.log('multipart');
+      // console.log('multipart');
       return await next();
     }
 

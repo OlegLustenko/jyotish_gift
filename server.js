@@ -1,3 +1,10 @@
+'use strict';
+
+// if (process.env.TRACE) {
+  require('./server/libs/trace');
+// }
+
+
 import Koa from 'koa';
 import fs from 'fs';
 import middlewares from './server/middlewares';
@@ -11,14 +18,15 @@ import {connectDatabase} from './server/libs/mongoose';
 })()
 const app = new Koa();
 app.keys = config.keys;
-
-// let handlers = fs.readdirSync('./server/handlers');
-// handlers.forEach(handler => {
-//   app.use(require('./server/handlers/' + handler).default())
-// });
-
 app.use(middlewares());
-// app.use(handlers());
-app.use(routes());
 
+
+let handlers = fs.readdirSync('./server/handlers');
+handlers.forEach(handler => {
+  // console.log(require('./server/handlers/' + handler)[handler]());
+  app.use(require('./server/handlers/' + handler)[handler]())
+});
+
+// console.log(app);
+app.use(routes());
 app.listen(3000, 'localhost', () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));

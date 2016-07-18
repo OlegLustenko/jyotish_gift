@@ -52,13 +52,13 @@ passport.use(new LocalStrategy({
 
 let passportInitialize = passport.initialize();
 
-export default async function (next) {
+export default async function localPassport(ctx, next) {
 Object.defineProperty(this, 'user', {
   get: function () {
     return this.req.user;
   }
 });
 
-await passportInitialize.call(this, next);
+await passportInitialize.call(ctx, next);
 
 };

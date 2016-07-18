@@ -1,3 +1,3 @@
-import LocalStrategy from './LocalStrategy';
+import Strategy from './localStrategy';
 
-export default { LocalStrategy }
+export { Strategy as LocalStrategy }

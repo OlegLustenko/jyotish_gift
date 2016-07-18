@@ -4,6 +4,8 @@ export default(router) => {
   router.post('/user/auth', async function (ctx, next) {
     // let user;
     let { ...req } = ctx.request.body;
+
+    console.log(ctx.user);
     let user = await User.find(req).exec();
     if (!user.length) {
       user = await User.create({firstName: req.firstName, lastName: req.lastName, email: req.email, password: req.password,}).toObject();
