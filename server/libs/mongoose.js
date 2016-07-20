@@ -14,7 +14,7 @@ export function connectDatabase() {
       .once('open', () => resolve(mongoose.connections[0]));
 
     // console.log(config.mongoose.uri, config.mongoose.options)
-    console.log('Database ready!')
+    console.log('Database initialization')
     // mongoose.Promise = global.Promise;
     mongoose.connect(config.mongoose.uri, config.mongoose.options, (err) => {
       console.log(err)

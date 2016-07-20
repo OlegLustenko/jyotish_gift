@@ -7,6 +7,12 @@ import {CONSTS} from './consts';
 
 import path from 'path';
 
+let mongodbUri;
+
+if(!process.env.MONGODB_URL) {
+  mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`
+}
+
 const config = {
   consts: CONSTS,
   host: {
@@ -24,7 +30,7 @@ const config = {
   },
   keys: ['mysecret'],
   mongoose: {
-    uri: (process.env.MONGODB_URL || '127.0.0.1/') + 'gift',
+    uri: process.env.MONGODB_URL || mongodbUri,
     options: {
       server: {
         socketOptions: {

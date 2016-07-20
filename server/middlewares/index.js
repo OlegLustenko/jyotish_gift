@@ -7,7 +7,7 @@ import bodyParser from 'koa-bodyparser';
 import asyncBusboy from './multiPart';
 import sessionStore from './mongooseSession';
 import passport from './passport-initialize';
-// import views from './views';
+import {join} from 'path';
 
 import {config} from 'config';
 
@@ -17,9 +17,8 @@ export default function middlewares() {
     koa_static('dist'),
     bodyParser(),
     asyncBusboy(),
-    views(config.projectRoot + '/dist', {html: 'underscore'}),
+    views(join(config.projectRoot,'dist'), {html: 'underscore'}),
     convert(sessionStore)
-    // sessionStore(),,
   ])
 
 }

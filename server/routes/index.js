@@ -7,11 +7,11 @@ import compose from 'koa-compose';
 
 const routerConfig = [
   {
-    folder: 'base',
-    prefix: ''
-  }, {
     folder: 'apis',
-    prefix: '/api',
+    prefix: '/api'
+  }, {
+    folder: 'base',
+    prefix: '',
   },
 ];
 
@@ -26,9 +26,16 @@ export default function routes() {
     const routes = importDir('./' + curr.folder);
     const router = new Router({prefix: curr.prefix});
 
-    Object.keys(routes).map(name => routes[name](router));
+    Object
+      .keys(routes)
+      .map(name => routes[name](router));
 
-    return [router.routes(), ...prev, ];
+    return [
+      router.routes(),
+      // router.allowedMethods(),
+      ...prev,
+    ];
   }, []);
   return compose(composed);
+  // return compose([...new Router().get('/api/users',async (ctx, next)=>{console.log('asd'); await next()})])
 }

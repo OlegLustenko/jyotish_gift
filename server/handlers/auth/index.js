@@ -19,7 +19,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use('local', LocalStrategy);
 let passportInitialize = passport.initialize();
-export  function auth (ctx, next) {
+export function auth(ctx, next) {
   console.log('Auth initialize...')
 
   //... in process. Wrapper about passport user
