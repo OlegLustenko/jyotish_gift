@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec npm run babel-node server.js",
-    "babel-node": "babel-node --preset=es2015",
+    "start": "nodemon --exec babel-node server.js",
+    "babel-node": "babel-node server.js",
     "dev": "./node_modules/.bin/webpack-dev-server --watch-poll --hot --content-base dist"
   },
   "author": "",
