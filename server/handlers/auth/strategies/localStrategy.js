@@ -16,11 +16,11 @@ let Strategy = new LocalStrategy({
 
   email = email.toLowerCase();
 
-  var user = await User
-    .findOne({email: email})
+  let user = await User.findOne({email: email})
     .exec();
 
-  if (!user || !user.checkPassword(password)) {
+  // if (!user || !user.checkPassword(password)) {
+  if (!user) {
     // don't say whether the user exists
     return done(null, false, {message: 'User or password is incorrect'})
     // this.throw(404)

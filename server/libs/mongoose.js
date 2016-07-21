@@ -8,16 +8,24 @@ export function connectDatabase() {
       mongoose.set('debug', true)
     }
 
-    mongoose.connection
+    mongoose
+      .connection
       .on('error', error => reject(error))
       .on('close', () => console.log('Database connection closed.'))
       .once('open', () => resolve(mongoose.connections[0]));
+    console.log('Database initialization...')
 
-    // console.log(config.mongoose.uri, config.mongoose.options)
-    console.log('Database initialization')
-    // mongoose.Promise = global.Promise;
+    if (config.mongoose.uri.includes('mlab')) {
+      console.log('\x1b[36m%s\x1b[0m','Connected to MongoLab')
+    } else {
+      console.log('Server uses local-Database')
+    }
+
     mongoose.connect(config.mongoose.uri, config.mongoose.options, (err) => {
-      console.log(err)
+      if (err) {
+        console.log(err)
+      }
+
     });
   })
 }

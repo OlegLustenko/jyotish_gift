@@ -7,19 +7,14 @@ import compose from 'koa-compose';
 
 const routerConfig = [
   {
-    folder: 'apis',
-    prefix: '/api'
-  }, {
     folder: 'base',
-    prefix: '',
+    prefix: ''
+  }, {
+    folder: 'api',
+    prefix: '/api'
   },
+  // { folder: 'login', prefix: '/login' }
 ];
-
-//USER
-//@@ firstName
-//@@ lastName
-//@@ email
-//@@ password
 export default function routes() {
 
   const composed = routerConfig.reduce((prev, curr) => {
@@ -33,7 +28,7 @@ export default function routes() {
     return [
       router.routes(),
       // router.allowedMethods(),
-      ...prev,
+      ...prev
     ];
   }, []);
   return compose(composed);
