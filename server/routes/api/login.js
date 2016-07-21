@@ -1,6 +1,6 @@
 import passport from 'koa-passport';
 
-export default(router) => {
+export default (router) => {
 
   router.post('/auth/login', async(ctx, next) => {
     let middleware = passport.authenticate('local', async(user, info) => {

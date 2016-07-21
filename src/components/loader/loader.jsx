@@ -16,12 +16,9 @@ export default class Loader extends Component {
         </div>
 
         <h1 className="loading">Loader
-          <span className="dot_one">
-            .</span>
-          <span className="dot_two">
-            .</span>
-          <span className="dot_three">
-            .</span>
+          <span className="dot_one">.</span>
+          <span className="dot_two">.</span>
+          <span className="dot_three">.</span>
         </h1>
       </div>
     )

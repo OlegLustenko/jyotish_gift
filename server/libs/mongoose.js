@@ -1,4 +1,4 @@
-import {config} from 'config';
+import { config } from 'config';
 import mongoose from 'mongoose';
 
 export function connectDatabase() {
@@ -16,10 +16,11 @@ export function connectDatabase() {
     console.log('Database initialization...')
 
     if (config.mongoose.uri.includes('mlab')) {
-      console.log('\x1b[36m%s\x1b[0m','Connected to MongoLab')
+      console.log('\x1b[36m%s\x1b[0m', 'Connected to MongoLab')
     } else {
       console.log('Server uses local-Database')
     }
+    mongoose.Promise = require('bluebird');
 
     mongoose.connect(config.mongoose.uri, config.mongoose.options, (err) => {
       if (err) {
