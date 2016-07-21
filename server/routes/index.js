@@ -19,7 +19,7 @@ export default function routes() {
 
   const composed = routerConfig.reduce((prev, curr) => {
     const routes = importDir('./' + curr.folder);
-    const router = new Router({prefix: curr.prefix});
+    const router = new Router({ prefix: curr.prefix });
 
     Object
       .keys(routes)
@@ -32,5 +32,5 @@ export default function routes() {
     ];
   }, []);
   return compose(composed);
-  // return compose([...new Router().get('/api/users',async (ctx, next)=>{console.log('asd'); await next()})])
+
 }
