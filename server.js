@@ -10,6 +10,7 @@ import middlewares from './server/middlewares';
 import routes from './server/routes';
 import {config} from 'config';
 import {connectDatabase} from './server/libs/mongoose';
+import ReactDOM from 'react-dom/server';
 
 (async() => {
   await connectDatabase()
@@ -23,7 +24,7 @@ handlers.forEach(handler => {
   app.use(require('./server/handlers/' + handler)[handler]())
 });
 
-//console.log(routes.toString());
+
 app.use(routes());
 app.listen({...config.host},
     () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));
