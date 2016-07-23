@@ -13,30 +13,35 @@ import {Loader} from './components/loader';
 
 import './styles/style.css'
 
-let Navigation = () => {
-  return (
-    <nav className="navbar navbar-light bg-faded">
-      <ul className="nav navbar-nav">
-        <li className="nav-item">
-          <Link to="/">Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="profile">Profile</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="login">Login</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="logout">Logout</Link>
-        </li>
-      </ul>
-      <Loader/>
-    </nav>
-  )
+class Navigation extends Component {
+  render(){
+    return (
+      <nav className="navbar navbar-light bg-faded">
+        <ul className="nav navbar-nav">
+          <li className="nav-item">
+            <Link to="/">Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="profile">Profile</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="login">Login</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="logout">Logout</Link>
+          </li>
+        </ul>
+        <Loader/>
+      </nav>
+    )
+  }
 }
 
 class App extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     return (
       <div>
@@ -48,6 +53,9 @@ class App extends Component {
 }
 
 class Profile extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     return (
       <div>
@@ -59,6 +67,9 @@ class Profile extends Component {
 }
 
 class Logout extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     return (
       <div>
@@ -70,14 +81,10 @@ class Logout extends Component {
 }
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.register = this
-      .register
-      .bind(this);
-    this.submit = this
-      .submit
-      .bind(this);
+  constructor(props) {
+    super(props);
+    this.register = this.register.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   submit(e) {
