@@ -1,86 +1,6 @@
-import ReactDOM from 'react-dom';
 import React, {Component} from 'react';
-import {
-  Router,
-  Route,
-  IndexRoute,
-  Link,
-  IndexLink,
-  browserHistory
-} from 'react-router';
 
-import {Loader} from './components/loader';
-
-import './styles/style.css'
-
-class Navigation extends Component {
-  render(){
-    return (
-      <nav className="navbar navbar-light bg-faded">
-        <ul className="nav navbar-nav">
-          <li className="nav-item">
-            <Link to="/">Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="profile">Profile</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="login">Login</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="logout">Logout</Link>
-          </li>
-        </ul>
-        <Loader/>
-      </nav>
-    )
-  }
-}
-
-class App extends Component {
-  constructor(props){
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h1 className="btn btn-primary">Home</h1>
-        <Navigation/>
-      </div>
-    )
-  }
-}
-
-class Profile extends Component {
-  constructor(props){
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h1 className="btn btn-primary">profile</h1>
-        <Navigation/>
-      </div>
-    )
-  }
-}
-
-class Logout extends Component {
-  constructor(props){
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h1 className="btn btn-primary">logout</h1>
-        <Navigation/>
-      </div>
-    )
-  }
-}
-
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.register = this.register.bind(this);
@@ -162,11 +82,3 @@ class Login extends Component {
     )
   }
 }
-let mountNode = document.getElementById('app');
-ReactDOM.render(
-  <Router history={browserHistory}>
-  <Route path='/' component={App}/>
-  <Route path='profile' component={Profile}/>
-  <Route path='logout' component={Logout}/>
-  <Route path='login' component={Login}/>
-</Router>, mountNode)

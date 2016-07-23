@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer';
 
 export default {
   entry : {
-    app: './src/main',
+    app: './src/client',
     vendor: [
       'react', 'react-dom', 'react-router',
     ],

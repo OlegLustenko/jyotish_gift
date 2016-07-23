@@ -10,7 +10,8 @@ import path from 'path';
 let mongodbUri;
 
 if(!process.env.MONGODB_URL) {
-  mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`
+  // mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`
+  mongodbUri = `localhost/gift`
 }
 
 const config = {
