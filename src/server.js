@@ -22,6 +22,7 @@ import {createLocation} from 'history/lib/createLocation';
 const app = new Koa();
 app.keys = config.keys;
 app.use(middlewares());
+console.log('qwe');
 
 let handlers = fs.readdirSync(join(__dirname, 'core/handlers'));
 handlers.forEach(handler => {
@@ -32,7 +33,7 @@ app.use(async(ctx,next)=> {
   console.log('ok');
   console.log('ok_22');
   let location = createLocation(ctx.req.url);
-  console.log('test');
+  
   match({ routes, location }, (error, redirectLocation, renderProps) => {
       console.log(error);
       console.log(redirectLocation);
