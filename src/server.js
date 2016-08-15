@@ -30,6 +30,7 @@ handlers.forEach(handler => {
 
 app.use(async(ctx,next)=> {
   console.log('ok');
+  console.log('ok_22');
   let location = createLocation(ctx.req.url);
   console.log('test');
   match({ routes, location }, (error, redirectLocation, renderProps) => {
