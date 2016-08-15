@@ -22,6 +22,7 @@ import {createLocation} from 'history/lib/createLocation';
 const app = new Koa();
 app.keys = config.keys;
 app.use(middlewares());
+console.log('qwe');
 
 let handlers = fs.readdirSync(join(__dirname, 'core/handlers'));
 handlers.forEach(handler => {
