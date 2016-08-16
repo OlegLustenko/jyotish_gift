@@ -34,6 +34,7 @@ app.use(async(ctx,next)=> {
   console.log('ok_22');
   console.log('ok_22');
   console.log('ok_22');
+  
   let location = createLocation(ctx.req.url);
   
   match({ routes, location }, (error, redirectLocation, renderProps) => {
