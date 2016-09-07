@@ -10,7 +10,7 @@ import React from 'react';
 let mountNode = document.getElementById('app');
 
 
-const appHistory = useRouterHistory(createHistory)({queryKey:false});
-match({routes, location }, () => {
-     render(<Router routes={routes} history={appHistory} />, mountNode)
+const appHistory = useRouterHistory(createHistory)({ queryKey: false });
+match({ routes, location }, () => {
+  render(<Router routes={routes} history={appHistory} />, mountNode)
 })
