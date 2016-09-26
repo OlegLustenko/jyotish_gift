@@ -9,16 +9,16 @@ import path from 'path';
 
 let mongodbUri;
 
-if(!process.env.MONGODB_URL) {
-  // mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`
-  mongodbUri = `localhost/gift`
+if (!process.env.MONGODB_URL) {
+  mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`;
+  // mongodbUri = `localhost/gift`;
 }
 
 const config = {
   consts: CONSTS,
   host: {
     ip: 'localhost',
-    port: 3000,
+    port: 3000
   },
   crypto: {
     hash: {
@@ -26,7 +26,7 @@ const config = {
       // may be slow(!): iterations = 12000 take ~60ms to generate strong password
       iterations: process.env.NODE_ENV == process.env.OPENSHIFT_ENV_VAR
         ? 12000
-        : 1,
+        : 1
     }
   },
   keys: ['mysecret'],
@@ -37,14 +37,15 @@ const config = {
         socketOptions: {
           keepAlive: 1
         },
-        poolSize: 5,
+        poolSize: 5
       },
       db: {
         nativeParser: true
-      },
-    },
+      }
+    }
   },
 
-  projectRoot: process.cwd(),
-}
-export { config }
+  projectRoot: process.cwd()
+};
+
+export { config };

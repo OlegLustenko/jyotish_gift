@@ -2,80 +2,69 @@ import webpack from 'webpack';
 import path from 'path';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
+import postcssImport from 'postcss-import';
 
 export default {
-  entry : {
+  entry: {
     app: './src/client',
     vendor: [
-      'react', 'react-dom', 'react-router',
-    ],
+      'react', 'react-dom', 'react-router'
+    ]
   },
-  output : {
+  output: {
     path: 'dist',
     publicPath: '/',
     filename: '[name].js',
-    library: '[name]',
+    library: '[name]'
   },
-  resolve : {
+  resolve: {
     modulesDirectories: ['node_modules'],
-    extensions: [
-      '',
-      '.js',
-      '.css',
-      '.html',
-      '.styl',
-      '.jsx',
-    ],
+    extensions: ['', '.js', '.css', '.html']
   },
 
-  resolveLoader : {
+  resolveLoader: {
     modulesDirectories: ['node_modules'],
-    moduleTemplates: [
-      '*-loader', '*',
-    ],
-    extensions: [
-      '',
-      '.js',
-      '.css',
-      '.html',
-      '.styl',
-      '.jsx',
-    ],
+    moduleTemplates: ['*-loader', '*'],
+    extensions: ['', '.js', '.css', '.html']
   },
-  plugins : [
+  plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor-min.js"}),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' })
     // new HtmlWebpackPlugin({
     //   template: './client/index.html'
     // }),
-    // new webpack.HotModuleReplacementPlugin(),,,,,,,,,,,,,
+    // new webpack.HotModuleReplacementPlugin()
   ],
-  module : {
+  module: {
     loaders: [
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
         query: {
-          presets: ['react', 'es2015',]
+          presets: ['react', 'es2015']
         },
-        include: path.join(__dirname, 'src'),
+        include: path.join(__dirname, 'src')
       }, {
         test: /\.(woff|woff2|ttf|svg|eot|png|svg|jpg|gif)$/,
         loader: 'file?name=[path][name].[ext]'
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader',
-      },
+        loader: 'style-loader!css-loader!postcss-loader'
+      }
     ]
   },
-  postcss:() => [precss, autoprefixer],
-  devServer : {
+  postcss: (wp) => [
+    postcssImport({ addDependencyTo: wp }),
+    precss,
+    autoprefixer
+  ],
+  devServer: {
     publicPath: '/',
     inline: true,
     historyApiFallback: true,
     port: 9000,
     proxy: 3000,
-    host: 'localhost',
-  },
+    host: 'localhost'
+  }
 }

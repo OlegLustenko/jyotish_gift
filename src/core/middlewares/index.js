@@ -3,8 +3,7 @@ import importDir from 'import-dir';
 
 export default function middlewares() {
 
-  return compose(Object.values(importDir('./compose'))
-    .map(fn => fn()));
+  return compose(Object.values(importDir('./compose')).map(fn => fn()));
 
   // return compose([
   //   favicon(),
