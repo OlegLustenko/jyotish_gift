@@ -2,14 +2,13 @@ import webpack from 'webpack';
 import path from 'path';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
-import postcssImport from 'postcss-import';
+// import postcssImport from 'postcss-import';
 
 export default {
+  // context: __dirname + '/src',
   entry: {
     app: './src/client',
-    vendor: [
-      'react', 'react-dom', 'react-router'
-    ]
+    vendor: ['react', 'react-dom', 'react-router']
   },
   output: {
     path: 'dist',
@@ -18,14 +17,14 @@ export default {
     library: '[name]'
   },
   resolve: {
-    modulesDirectories: ['node_modules'],
-    extensions: ['', '.js', '.css', '.html']
+    // modules: [            'node_modules'    ]
+    // modules: [path.resolve(__dirname, '/src'), 'node_modules'],
+    // root: path.resolve('./src'),
   },
-
+  // modules: ['node_modules', __dirname + '/node_modules'],
   resolveLoader: {
-    modulesDirectories: ['node_modules'],
-    moduleTemplates: ['*-loader', '*'],
-    extensions: ['', '.js', '.css', '.html']
+    // root: path.resolve('./src'),
+    // modules: ['node_modules', '/node_modules']
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
@@ -38,27 +37,28 @@ export default {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        loaders: ['babel'],
+        test: /\.js$/,
+        loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react', 'es2015'],
+          // includePaths: ["src"]
         },
+        exclude: /node_modules/,
         include: path.join(__dirname, 'src')
-      }, {
+      },
+      {
         test: /\.(woff|woff2|ttf|svg|eot|png|svg|jpg|gif)$/,
         loader: 'file?name=[path][name].[ext]'
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader'
+        loaders: ['style', 'css', 'postcss'],
+        options: {
+          postcss: (wp) => [postcssImport({ addDependencyTo: wp }), precss, autoprefixer]
+        }
       }
     ]
   },
-  postcss: (wp) => [
-    postcssImport({ addDependencyTo: wp }),
-    precss,
-    autoprefixer
-  ],
   devServer: {
     publicPath: '/',
     inline: true,
@@ -67,4 +67,4 @@ export default {
     proxy: 3000,
     host: 'localhost'
   }
-}
+};

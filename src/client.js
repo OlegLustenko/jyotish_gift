@@ -12,6 +12,6 @@ let mountNode = document.getElementById('app');
 
 const appHistory = useRouterHistory(createHistory)({ queryKey: false });
 match({ routes, location }, () => {
-  render(<Router routes={routes} history={appHistory} />, mountNode);
+  render(<Router routes={routes} history={appHistory} onUpdate={() => window.scrollTo(0, 0) }/>, mountNode);
 });
 
