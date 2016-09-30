@@ -16,27 +16,15 @@ export default {
     filename: '[name].js',
     library: '[name]'
   },
-  resolve: {
-    // modules: [            'node_modules'    ]
-    // modules: [path.resolve(__dirname, '/src'), 'node_modules'],
-    // root: path.resolve('./src'),
-  },
-  // modules: ['node_modules', __dirname + '/node_modules'],
-  resolveLoader: {
-    // root: path.resolve('./src'),
-    // modules: ['node_modules', '/node_modules']
-  },
+  resolve: {},
+
+  resolveLoader: {},
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' })
-    // new HtmlWebpackPlugin({
-    //   template: './client/index.html'
-    // }),
-    // new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.js$/,
         loader: 'babel',
         query: {
@@ -52,7 +40,11 @@ export default {
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss'],
+        use: [
+          { loader: 'style' },
+          { loader: 'css' },
+          { loader: 'postcss' }
+        ],
         options: {
           postcss: (wp) => [postcssImport({ addDependencyTo: wp }), precss, autoprefixer]
         }

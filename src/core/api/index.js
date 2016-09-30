@@ -5,10 +5,9 @@ import Router from 'koa-router';
 import importDir from 'import-dir';
 import compose from 'koa-compose';
 
-const routerConfig = [
-  {
+const routerConfig = [{
     folder: 'base',
-    prefix: ''
+    prefix: 'base'
   }, {
     folder: 'api',
     prefix: '/api'
