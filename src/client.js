@@ -1,7 +1,5 @@
-import './styles/style.css';
-
-import Match from 'react-router/Match'
-import Link from 'react-router/Link'
+import Match from 'react-router/Match';
+import Link from 'react-router/Link';
 
 import React from 'react';
 
@@ -12,9 +10,9 @@ const ParamsExample = () => {
     <div>
         <h2>Accounts</h2>
         <ul>
-          <li><Link to="/netflix">Netflix</Link></li>
-          <li><Link to="/zillow-group">Zillow Group</Link></li>
-          <li><Link to="/yahoo">Yahoo</Link></li>
+          <li><Link to="/netflix">Jyotish</Link></li>
+          <li><Link to="/zillow-group">Gift</Link></li>
+          <li><Link to="/yahoo"></Link></li>
           <li><Link to="/modus-create">Modus Create</Link></li>
         </ul>
 

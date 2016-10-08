@@ -39,7 +39,6 @@ app.use(async(ctx, next) => {
   const context = createServerRenderContext()
 
   // render the first time 
-  // console.log(context);
   let markup = renderToString(
     <ServerRouter location={ctx.url} context={context}>
       <App />
@@ -68,42 +67,8 @@ app.use(async(ctx, next) => {
     }
 
     ctx.body = markup;
-    // res.write(markup)
-    // res.end()
   }
   await next();
-
-
-
-
-
-
-  //   let location = createLocation(ctx.req.url);
-
-  //   match({ routes, location }, (error, redirectLocation, renderProps) => {
-  //     console.log('location:', location);
-
-
-  //     if (redirectLocation) {
-  //       console.log('redirectLocation:', redirectLocation);
-  //       ctx.redirect(redirectLocation.pathname + redirectLocation.search)
-  //     } else if (error) {
-  //       console.log('error:', error);
-  //       ctx.throw(500, error.message)
-  //     } else if (renderProps == null) {
-  //       ctx.throw(404, 'Not Found')
-  //     } else {
-  //       // set proper HTTP code for if matched route wasn't found
-  //       // console.log('renderProps:', renderProps);
-
-  //       // if (renderProps.components.indexOf(NotFound) != -1) {
-  //       //     ctx.status = 404
-  //       // }
-  //       ctx.response.body = renderToString(<RouterContext {...renderProps}/>)
-
-  //     }
-  //   })
-  //   await next();
 })
 
 app.use(api());
