@@ -8,6 +8,7 @@
     "start": "nodemon src/server.js --exec babel-node",
     "server": "./node_modules/.bin/babel-node src/server.js",
     "prod": "NODE_ENV=production npm run server",
+    "build:prod": "./node_modules/.bin/webpack -p",
     "start2": "nodemon src/server.js --exec babel-node --preset=node6",
     "dev": "./node_modules/.bin/webpack-dev-server --watch-poll --hot --content-base src"
   },
