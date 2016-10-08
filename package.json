@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.js --exec babel-node",
+    "server": "./node_modules/.bin/babel-node src/server.js",
+    "prod": "NODE_ENV=production npm run server",
     "start2": "nodemon src/server.js --exec babel-node --preset=node6",
-    "dev": "./node_modules/.bin/webpack-dev-server --watch-poll --hot --content-base dist"
+    "dev": "./node_modules/.bin/webpack-dev-server --watch-poll --hot --content-base src"
   },
   "author": "Oleg Lustenko",
   "license": "ISC",
@@ -46,9 +48,11 @@
     "webpack-dev-server": "latest"
   },
   "devDependencies": {
-    "css-loader": "^0.25.0",
     "autoprefixer": "latest",
+    "babel-cli": "^6.16.0",
     "clarify": "^2.0.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "postcss-import": "^8.1.2",
     "postcss-loader": "latest",
     "precss": "^1.4.0",

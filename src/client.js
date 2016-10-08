@@ -1,11 +1,8 @@
 import './styles/style.css';
 
-import { render } from 'react-dom';
-import Router from 'react-router/BrowserRouter';
 import Match from 'react-router/Match'
 import Link from 'react-router/Link'
 
-import { routes } from './routes';
 import React from 'react';
 
 // let mountNode = document.getElementById('app');
@@ -21,7 +18,7 @@ const ParamsExample = () => {
           <li><Link to="/modus-create">Modus Create</Link></li>
         </ul>
 
-        <Match pattern="/:id" component={Child} />
+        <Match pattern="/:id" component={ Child } />
       </div>
   );
 };

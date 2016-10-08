@@ -12,7 +12,7 @@ import routes from './routes';
 import { config } from 'config';
 
 import { connectDatabase } from './core/libs/mongoose';
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import { join } from 'path';
 
@@ -38,10 +38,8 @@ app.use(async(ctx, next) => {
 
   const context = createServerRenderContext()
 
-  // render the first time
-  //   console.log(ctx.url)
-  //   <App/>
-  console.log(context);
+  // render the first time 
+  // console.log(context);
   let markup = renderToString(
     <ServerRouter location={ctx.url} context={context}>
       <App />
@@ -53,13 +51,8 @@ app.use(async(ctx, next) => {
   // the result will tell you if it redirected, if so, we ignore
   // the markup and send a proper redirect.
   if (result.redirect) {
-    // res.writeHead(301, {
-    //   Location: result.redirect.pathname
-    // })
-
     ctx.redirect(result.redirect.pathname)
     await next();
-    // res.end()
   } else {
 
     // the result will tell you if there were any misses, if so
@@ -68,15 +61,12 @@ app.use(async(ctx, next) => {
     // this time (on the client they know from componentDidMount)
     if (result.missed) {
       markup = renderToString(
-        <ServerRouter
-          location={ctx.url}
-          context={context}
-        >
-        <App />
+        <ServerRouter location={ctx.url} context={context}>
+          <App />
         </ServerRouter>
       )
     }
-    console.log(markup);
+
     ctx.body = markup;
     // res.write(markup)
     // res.end()
@@ -117,5 +107,6 @@ app.use(async(ctx, next) => {
 })
 
 app.use(api());
-app.listen({...config.host },
+app.listen({...config.host
+  },
   () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));

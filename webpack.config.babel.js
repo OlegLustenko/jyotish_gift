@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
+import ExtractTextPlugin, { extract } from 'extract-text-webpack-plugin';
 // import postcssImport from 'postcss-import';
 
 export default {
@@ -13,50 +14,74 @@ export default {
   output: {
     path: 'dist',
     publicPath: '/',
-    filename: '[name].js',
-    library: '[name]'
+    filename: '[name].js'
+      // library: '[name]'
   },
   resolve: {},
 
   resolveLoader: {},
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' })
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
+    // new ExtractTextPlugin()
+    new ExtractTextPlugin({
+      // filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
+      filename: "css/[name].css",
+      disable: false,
+      allChunks: true
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+        postcss: {
+          postcss: (wp) => [require("postcss-cssnext")()]
+        }
+      }
+    })
   ],
   module: {
     loaders: [{
         test: /\.js$/,
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015'],
-          // includePaths: ["src"]
+          presets: ['react', 'es2015']
         },
         exclude: /node_modules/,
         include: path.join(__dirname, 'src')
-      },
-      {
+      }, {
         test: /\.(woff|woff2|ttf|svg|eot|png|svg|jpg|gif)$/,
         loader: 'file?name=[path][name].[ext]'
-      },
-      {
+      }, {
         test: /\.css$/,
-        use: [
-          { loader: 'style' },
-          { loader: 'css' },
-          { loader: 'postcss' }
-        ],
-        options: {
-          postcss: (wp) => [postcssImport({ addDependencyTo: wp }), precss, autoprefixer]
-        }
-      }
+        loader: extract({
+          notExtractLoader: "style-loader",
+          loader: "css-loader"
+            // publicPath: "../"
+        }),
+        // options: {
+        //   postcss: (wp) => [require("postcss-cssnext")()]
+        // }
+      },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader', 'css-loader', 'postcss-loader'
+      //   ],
+      //   // loader: "style-loader!css-loader!postcss-loader",
+      //   options: {
+      //     postcss: (wp) => [require("postcss-cssnext")()]
+      //   }
+      // }
+      // use: [
+
+      //   { loader: 'style' },
+      //   { loader: 'css' },
+      //   { loader: 'postcss' }
+      // ],
+      // options: {
+      //   postcss: (wp) => [postcssImport({ addDependencyTo: wp }), precss, autoprefixer]
+      // }
+      // }
     ]
-  },
-  devServer: {
-    publicPath: '/',
-    inline: true,
-    historyApiFallback: true,
-    port: 9000,
-    proxy: 3000,
-    host: 'localhost'
   }
 };
