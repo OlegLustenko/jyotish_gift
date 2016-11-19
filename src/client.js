@@ -1,38 +1,11 @@
-import Match from 'react-router/Match';
-import Link from 'react-router/Link';
-
+import ReactDOM from 'react-dom';
 import React from 'react';
+import App from './app';
+import { BrowserRouter } from 'react-router';
 
-// let mountNode = document.getElementById('app');
-
-const ParamsExample = () => {
-  return (
-    <div>
-        <h2>Accounts</h2>
-        <ul>
-          <li><Link to="/netflix">Jyotish</Link></li>
-          <li><Link to="/zillow-group">Gift</Link></li>
-          <li><Link to="/yahoo"></Link></li>
-          <li><Link to="/modus-create">Modus Create</Link></li>
-        </ul>
-
-        <Match pattern="/:id" component={ Child } />
-      </div>
-  );
-};
-
-const Child = ({ params }) => {
-  return (
-    <div>
-      <h3>ID: {params.id}</h3>
-    </div>
-  );
-};
+ReactDOM.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>, document.getElementById('app'));
 
 
-export default ParamsExample;
-
-// const appHistory = useRouterHistory(createHistory)({ queryKey: false });
-// match({ routes, location }, () => {
-// render(<ParamsExample />, mountNode);
-// });

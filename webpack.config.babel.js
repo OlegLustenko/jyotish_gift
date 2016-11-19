@@ -12,17 +12,17 @@ export default {
     vendor: ['react', 'react-dom', 'react-router']
   },
   output: {
-    path: 'dist',
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js'
-      // library: '[name]'
+    // library: '[name]'
   },
   resolve: {},
-
+  
   resolveLoader: {},
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
     // new ExtractTextPlugin()
     new ExtractTextPlugin({
       // filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
@@ -41,27 +41,27 @@ export default {
   ],
   module: {
     loaders: [{
-        test: /\.js$/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015']
-        },
-        exclude: /node_modules/,
-        include: path.join(__dirname, 'src')
-      }, {
-        test: /\.(woff|woff2|ttf|svg|eot|png|svg|jpg|gif)$/,
-        loader: 'file?name=[path][name].[ext]'
-      }, {
-        test: /\.css$/,
-        loader: extract({
-          notExtractLoader: "style-loader",
-          loader: "css-loader"
-            // publicPath: "../"
-        }),
-        // options: {
-        //   postcss: (wp) => [require("postcss-cssnext")()]
-        // }
+      test: /\.js$/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['react', 'es2015', 'stage-2']
       },
+      exclude: /node_modules/,
+      include: path.join(__dirname, 'src')
+    }, {
+      test: /\.(woff|woff2|ttf|svg|eot|png|svg|jpg|gif)$/,
+      loader: 'file?name=[path][name].[ext]'
+    }, {
+      test: /\.css$/,
+      loader: extract({
+        notExtractLoader: "style-loader",
+        loader: "css-loader"
+        // publicPath: "../"
+      }),
+      // options: {
+      //   postcss: (wp) => [require("postcss-cssnext")()]
+      // }
+    },
       // {
       //   test: /\.css$/,
       //   use: [
@@ -73,7 +73,7 @@ export default {
       //   }
       // }
       // use: [
-
+      
       //   { loader: 'style' },
       //   { loader: 'css' },
       //   { loader: 'postcss' }

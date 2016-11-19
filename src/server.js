@@ -15,11 +15,8 @@ import { connectDatabase } from './core/libs/mongoose';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import { join } from 'path';
-
-import App from './client';
-
 import React from 'react';
-
+import App from './app';
 
 (async() => {
   await connectDatabase()
@@ -27,7 +24,6 @@ import React from 'react';
 const app = new Koa();
 app.keys = config.keys;
 app.use(middlewares());
-console.log('qwe');
 
 let handlers = fs.readdirSync(join(__dirname, 'core/handlers'));
 handlers.forEach(handler => {
@@ -35,43 +31,51 @@ handlers.forEach(handler => {
 });
 
 app.use(async(ctx, next) => {
-
-  const context = createServerRenderContext()
-
-  // render the first time 
+  
+  const context = createServerRenderContext();
+  let htmlMarkup = (content) => `<html>
+  <head></head>
+  <body class="xxx">
+  <div id="app">${content}</div>  
+  <script src="vendor-min.js"></script>
+  <script src="app.js"></script>
+  </body>
+  </html>
+`;
+  // render the first time
   let markup = renderToString(
-    <ServerRouter location={ctx.url} context={context}>
-      <App />
-    </ServerRouter>
+       <ServerRouter location={ctx.url} context={context}>
+          <App />
+        </ServerRouter>
   );
-
+  
   const result = context.getResult();
-
+  
   // the result will tell you if it redirected, if so, we ignore
   // the markup and send a proper redirect.
-  if (result.redirect) {
-    ctx.redirect(result.redirect.pathname)
+  if ( result.redirect ) {
+    ctx.redirect(result.redirect.pathname);
     await next();
   } else {
-
+    
     // the result will tell you if there were any misses, if so
     // we can send a 404 and then do a second render pass with
     // the context to clue the <Miss> components into rendering
     // this time (on the client they know from componentDidMount)
-    if (result.missed) {
+    if ( result.missed ) {
       markup = renderToString(
-        <ServerRouter location={ctx.url} context={context}>
-          <App />
-        </ServerRouter>
+          <body className="test">
+          <ServerRouter location={ctx.url} context={context}>
+            <App />
+          </ServerRouter>
+          </body>
       )
     }
-
-    ctx.body = markup;
+    
+    ctx.body = htmlMarkup(markup);
   }
   await next();
-})
+});
 
 app.use(api());
-app.listen({...config.host
-  },
-  () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));
+app.listen({...config.host}, () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));

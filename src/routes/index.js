@@ -1,6 +1,5 @@
 // polyfill webpack require.ensure
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
-
+if ( typeof require.ensure !== 'function' ) require.ensure = (d, c) => c(require);
 
 import router from 'react-router';
 import App from '../components/App';
@@ -12,8 +11,7 @@ const testLogin = {
       callback(null, require('../routes/login'))
     })
   }
-
-}
+};
 
 
 // const BasicExample = () => (
@@ -35,7 +33,6 @@ const testLogin = {
 // )
 
 
-
 const routes = {
   path: '/',
   // getChildRoutes(location, cb) {
@@ -51,13 +48,13 @@ const routes = {
     });
   },
   component: App
-    // getComponent(nextState, callback) {
-    //   require.ensure([], function (require) {
-    //     callback(null, require('../components/App'))
-    //   })
-    // }
-
-}
+  // getComponent(nextState, callback) {
+  //   require.ensure([], function (require) {
+  //     callback(null, require('../components/App'))
+  //   })
+  // }
+  
+};
 
 
 export default routes
