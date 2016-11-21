@@ -17,6 +17,7 @@ import { ServerRouter, createServerRenderContext } from 'react-router'
 import { join } from 'path';
 import React from 'react';
 import App from './app';
+import { AppContainer } from 'react-hot-loader';
 
 (async() => {
   await connectDatabase()
@@ -44,9 +45,9 @@ app.use(async(ctx, next) => {
 `;
   // render the first time
   let markup = renderToString(
-       <ServerRouter location={ctx.url} context={context}>
-          <App />
-        </ServerRouter>
+      <ServerRouter location={ctx.url} context={context}>
+        <App />
+      </ServerRouter>
   );
   
   const result = context.getResult();
@@ -64,11 +65,11 @@ app.use(async(ctx, next) => {
     // this time (on the client they know from componentDidMount)
     if ( result.missed ) {
       markup = renderToString(
-          <body className="test">
-          <ServerRouter location={ctx.url} context={context}>
-            <App />
-          </ServerRouter>
-          </body>
+          <AppContainer >
+            <ServerRouter location={ctx.url} context={context}>
+              <App />
+            </ServerRouter>
+          </AppContainer>
       )
     }
     

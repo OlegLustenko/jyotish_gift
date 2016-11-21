@@ -8,20 +8,30 @@ import ExtractTextPlugin, { extract } from 'extract-text-webpack-plugin';
 export default {
   // context: __dirname + '/src',
   entry: {
-    app: './src/client',
+    app: ['eventsource-polyfill',
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      './src/client'],
     vendor: ['react', 'react-dom', 'react-router']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/dist/',
     filename: '[name].js'
     // library: '[name]'
   },
   resolve: {},
   
   resolveLoader: {},
+  //devServer: {
+  //  hot: true,
+  //  historyApiFallback: true,
+  //  proxy: 3000,
+  //  port: 3001
+  //},
   plugins: [
     new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
     // new ExtractTextPlugin()
     new ExtractTextPlugin({
@@ -44,7 +54,13 @@ export default {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['react', 'es2015', 'stage-2']
+        presets: ['es2015', 'stage-2', 'react'],
+        'env': {
+          'development': {
+            'presets': ['react-hmre']
+          }
+        }
+        
       },
       exclude: /node_modules/,
       include: path.join(__dirname, 'src')
