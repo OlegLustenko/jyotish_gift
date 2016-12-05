@@ -4,19 +4,18 @@ import precss from 'precss';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin, { extract } from 'extract-text-webpack-plugin';
 // import postcssImport from 'postcss-import';
-
-export default {
+const publicPath = '/dist/';
+export default [ {
   // context: __dirname + '/src',
   entry: {
-    app: ['eventsource-polyfill',
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      './src/client'],
-    vendor: ['react', 'react-dom', 'react-router']
+    app: [ './src/client', 'webpack-hot-middleware/client' ],
+    vendor: [ 'react', 'react-dom', 'react-router', 'webpack-hot-middleware/client' ]
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
-    filename: '[name].js'
+    path: path.resolve('dist'),
+    publicPath: '/js/',
+    filename: '[name].js',
+    chunkFilename: '[name].js'
     // library: '[name]'
   },
   resolve: {},
@@ -31,8 +30,8 @@ export default {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-  
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
+    
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
     // new ExtractTextPlugin()
     new ExtractTextPlugin({
       // filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
@@ -44,22 +43,17 @@ export default {
       options: {
         context: __dirname,
         postcss: {
-          postcss: (wp) => [require("postcss-cssnext")()]
+          postcss: (wp) => [ require("postcss-cssnext")() ]
         }
       }
     })
   ],
   module: {
-    loaders: [{
+    loaders: [ {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015', 'stage-2', 'react'],
-        'env': {
-          'development': {
-            'presets': ['react-hmre']
-          }
-        }
+        presets: [ 'react', 'es2015', 'stage-2' ]
         
       },
       exclude: /node_modules/,
@@ -100,4 +94,22 @@ export default {
       // }
     ]
   }
-};
+}, {
+  // The configuration for the server-side rendering
+  name: "server-side rendering",
+  entry: "./src/components/Html.js",
+  target: "node",
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: "../../server/page.generated.js",
+    publicPath: publicPath,
+    libraryTarget: "commonjs2"
+  },
+  externals: /^[a-z\-0-9]+$/,
+  //module: {
+  //  loaders: commonLoaders.concat([
+  //    { test: /\.css$/,  loader: path.join(__dirname, "server", "style-collector") + "!css-loader" },
+  //  ])
+  //}
+}
+];

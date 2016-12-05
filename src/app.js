@@ -5,12 +5,18 @@ import React from 'react';
 
 import Html from './components/Html';
 
+
+if ( module.hot ) {
+  console.log('qqq');
+  module.hot.accept()
+}
+
 const ParamsExample = () => {
   return (
       <div>
         <h2>Accounts</h2>
         <ul>
-          <li><Link to="/jyotish">Jyotish ww</Link></li>
+          <li><Link to="/jyotish">Jyotish  2</Link></li>
           <li><Link to="/gift">Gift</Link></li>
           <li><Link to="/Oleg">Oleg</Link></li>
           <li><Link to="/Astrology">Astrology</Link></li>
