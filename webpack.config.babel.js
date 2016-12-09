@@ -5,17 +5,17 @@ import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin, { extract } from 'extract-text-webpack-plugin';
 // import postcssImport from 'postcss-import';
 const publicPath = '/dist/';
-export default [ {
+export default [{
   // context: __dirname + '/src',
   entry: {
-    app: [ './src/client', 'webpack-hot-middleware/client' ],
-    vendor: [ 'react', 'react-dom', 'react-router', 'webpack-hot-middleware/client' ]
+    app: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './src/client'],
+    vendor: ['react-hot-loader/patch', 'webpack-hot-middleware/client', 'react', 'react-dom', 'react-router']
   },
   output: {
     path: path.resolve('dist'),
     publicPath: '/js/',
     filename: '[name].js',
-    chunkFilename: '[name].js'
+    //chunkFilename: '[name].js'
     // library: '[name]'
   },
   resolve: {},
@@ -31,7 +31,7 @@ export default [ {
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
     // new ExtractTextPlugin()
     new ExtractTextPlugin({
       // filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
@@ -43,19 +43,15 @@ export default [ {
       options: {
         context: __dirname,
         postcss: {
-          postcss: (wp) => [ require("postcss-cssnext")() ]
+          postcss: (wp) => [require("postcss-cssnext")()]
         }
       }
     })
   ],
   module: {
-    loaders: [ {
+    loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
-        presets: [ 'react', 'es2015', 'stage-2' ]
-        
-      },
       exclude: /node_modules/,
       include: path.join(__dirname, 'src')
     }, {

@@ -25,7 +25,7 @@ export default class Login extends Component {
   render() {
     return (
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="login">ENTER LOGIN AND PASSWORD</label>
+          <label htmlFor="login">ENTER LOGIN AND PASSWORD 2</label>
           <input id="login" placeholder="enter your login" type="text" value={this.state.login}
                  onChange={this.handleChange}/>
           <input type="password"/>

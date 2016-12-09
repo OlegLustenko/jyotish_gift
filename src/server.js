@@ -7,10 +7,9 @@
 import Koa from 'koa';
 import fs from 'fs';
 import middlewares from './core/middlewares';
-import { dev } from './core/middlewares/index';
 import api from './core/api';
 import routes from './routes';
-import { config } from 'config';
+const config = require('config').default;
 
 import { connectDatabase } from './core/libs/mongoose';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
@@ -29,14 +28,11 @@ app.use(middlewares());
 
 let handlers = fs.readdirSync(join(__dirname, 'core/handlers'));
 handlers.forEach(handler => {
-  app.use(require('./core/handlers/' + handler)[ handler ]())
+  app.use(require('./core/handlers/' + handler)[handler]())
 });
 app.use(api());
 
 app.use(async(ctx, next) => {
-  
-  //console.log(ctx.request.url);
-  //if ( ctx.request.url == '/__webpack_hmr' ) return await next();
   
   const context = createServerRenderContext();
   let htmlMarkup = (content) => `<html>
@@ -70,11 +66,9 @@ app.use(async(ctx, next) => {
     // this time (on the client they know from componentDidMount)
     if ( result.missed ) {
       markup = renderToStaticMarkup(
-          <AppContainer >
-            <ServerRouter location={ctx.url} context={context}>
-              <App />
-            </ServerRouter>
-          </AppContainer>
+          <ServerRouter location={ctx.url} context={context}>
+            <App />
+          </ServerRouter>
       )
     }
     ctx.type = 'text/html; charset=utf-8';
@@ -84,4 +78,4 @@ app.use(async(ctx, next) => {
 });
 
 
-app.listen({ ...config.host }, () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));
+app.listen({...config.host}, () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));

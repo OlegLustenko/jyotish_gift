@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
-import { config } from 'config';
+const {consts} = require('config').default;
 let Schema = mongoose.Schema;
-let consts = config.consts;
 let ObjectId = Schema.Types.ObjectId;
 
 
-let ChartSchema = new mongoose.Schema({
-
-});
+let ChartSchema = new mongoose.Schema({});
 
 export default mongoose.model('Chart', ChartSchema);

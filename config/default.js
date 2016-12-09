@@ -3,20 +3,23 @@
  */
 'use strict';
 import { CONSTS } from './consts';
+import webpackConfig from '../webpack.config.babel';
+import webpack from 'webpack';
+//const compiler = webpack(webpackConfig[0]);
 // import defer from 'config/defer';
 
 import path from 'path';
 
 let mongodbUri;
 
-if (!process.env.MONGODB_URL) {
+if ( !process.env.MONGODB_URL ) {
   mongodbUri = `mongodb://sa:1qaz2wsx@ds013182.mlab.com:13182/gift`;
   // mongodbUri = `localhost/gift`;
 }
 const NODE_ENV = process.env.NODE_ENV === 'production';
 
 console.log(NODE_ENV, process.env.NODE_ENV);
-const config = {
+export default {
   consts: CONSTS,
   host: {
     ip: NODE_ENV ? '10.129.8.143' : 'localhost',
@@ -44,8 +47,9 @@ const config = {
       }
     }
   },
-
+  webpackConfig: webpackConfig,
+  
   projectRoot: process.cwd()
 };
 
-export { config };
+//export default config ;
