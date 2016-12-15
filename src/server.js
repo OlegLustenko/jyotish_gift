@@ -3,7 +3,17 @@
 // if (!process.env.TRACE) {
 //   require('./server/libs/trace');
 // }
+//require('babel-register');
+//require('css-modules-require-hook/preset');
 
+require.extensions['.css'] = () => {
+  return;
+};
+
+//require.extensions['.css'] = () => {
+//  return;
+//};
+import debug from 'debug';
 import Koa from 'koa';
 import fs from 'fs';
 import middlewares from './core/middlewares';
@@ -18,6 +28,7 @@ import { join } from 'path';
 import React from 'react';
 import App from './app';
 import { AppContainer } from 'react-hot-loader';
+
 
 (async() => {
   await connectDatabase()
@@ -36,7 +47,9 @@ app.use(async(ctx, next) => {
   
   const context = createServerRenderContext();
   let htmlMarkup = (content) => `<html>
-    <head></head>
+   <head>
+      <link rel="stylesheet" href="css/app.css">
+    </head>
     <body class="xxx">
     <div id="app">${content}</div>  
     <script src="js/vendor-min.js"></script>
@@ -77,5 +90,9 @@ app.use(async(ctx, next) => {
   await next();
 });
 
+app.on('error', (error) => {
+  debug('error')(error);
+});
 
-app.listen({...config.host}, () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));
+
+app.listen({ ...config.host }, () => console.log('Server in running at %s:%d', config.host.ip, config.host.port));

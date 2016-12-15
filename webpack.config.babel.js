@@ -31,14 +31,17 @@ export default [{
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
-    // new ExtractTextPlugin()
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
     new ExtractTextPlugin({
-      // filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
+      //filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
       filename: "css/[name].css",
       disable: false,
       allChunks: true
     }),
+    //new ExtractTextPlugin("styles.css"),
+    //new ExtractTextPlugin('app.css', {
+    //  allChunks: true
+    //}),
     new webpack.LoaderOptionsPlugin({
       options: {
         context: __dirname,
@@ -61,8 +64,16 @@ export default [{
       test: /\.css$/,
       loader: extract({
         notExtractLoader: "style-loader",
-        loader: "css-loader"
-        // publicPath: "../"
+        loader: [{
+          loader: 'css-loader',
+          options: {
+            modules: true
+          }
+        },
+          {
+            loader: 'postcss-loader'
+          }],
+        publicPath: "/css/"
       }),
       // options: {
       //   postcss: (wp) => [require("postcss-cssnext")()]
@@ -90,22 +101,4 @@ export default [{
       // }
     ]
   }
-}, {
-  // The configuration for the server-side rendering
-  name: "server-side rendering",
-  entry: "./src/components/Html.js",
-  target: "node",
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: "../../server/page.generated.js",
-    publicPath: publicPath,
-    libraryTarget: "commonjs2"
-  },
-  externals: /^[a-z\-0-9]+$/,
-  //module: {
-  //  loaders: commonLoaders.concat([
-  //    { test: /\.css$/,  loader: path.join(__dirname, "server", "style-collector") + "!css-loader" },
-  //  ])
-  //}
-}
-];
+}];

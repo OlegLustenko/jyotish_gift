@@ -1,9 +1,10 @@
+import './style.css';
+
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './app';
 import { BrowserRouter } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
-
 
 let rootEl = document.getElementById('app');
 

@@ -1,9 +1,7 @@
 import Match from 'react-router/Match';
 import Link from 'react-router/Link';
-import Login from './components/Login/Login';
 import React from 'react';
-import style from './style.css';
-
+import Layout from './Layout';
 
 import Html from './components/Html';
 
@@ -12,7 +10,7 @@ const ParamsExample = () => {
       <div>
         <h2>Accounts</h2>
         <ul>
-          <li className={style.test}><Link to="/jyotish">Jyotish</Link></li>
+          <li className="test"><Link to="/jyotish">Jyotish 0</Link></li>
           <li><Link to="/gift">Gift</Link></li>
           <li><Link to="/Oleg">Oleg</Link></li>
           <li><Link to="/Astrology">Astrology</Link></li>
@@ -20,7 +18,7 @@ const ParamsExample = () => {
         </ul>
         
         
-        <Match pattern="/login" component={Login}/>
+        <Match pattern="/login" component={Layout}/>
         <Match pattern="/test/:id" component={ Child }/>
       </div>
   );
