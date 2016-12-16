@@ -7,7 +7,7 @@ import compose from 'koa-compose';
 
 const routerConfig = [{
     folder: 'base',
-    prefix: 'base'
+    prefix: 'test'
   }, {
     folder: 'api',
     prefix: '/api'

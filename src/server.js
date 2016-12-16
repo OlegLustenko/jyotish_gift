@@ -6,9 +6,9 @@
 //require('babel-register');
 //require('css-modules-require-hook/preset');
 
-require.extensions['.css'] = () => {
-  return;
-};
+//require.extensions['.css'] = () => {
+//  return;
+//};
 
 //require.extensions['.css'] = () => {
 //  return;
