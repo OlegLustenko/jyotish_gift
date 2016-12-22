@@ -6,12 +6,12 @@ import Layout from './Layout';
 import Html from './components/Html';
 
 const ParamsExample = () => {
-  return (
-      <div>
-        <h2>Accounts </h2>
+    return (
+        <div>
+        <h2>Accounts 123</h2>
         <ul>
-          <li className="test"><Link to="/jyotish">Jyotish 2</Link></li>
-          <li><Link to="/gift">Gift</Link></li>
+          <li className="test"><Link to="/jyotish">Jyotish 123</Link></li>
+          <li><Link to="/gift">Gift 3</Link></li>
           <li><Link to="/Oleg">Oleg</Link></li>
           <li><Link to="/Astrology">Astrology</Link></li>
           <li><Link to="/login">Test Login</Link></li>
@@ -21,15 +21,15 @@ const ParamsExample = () => {
         <Match pattern="/login" component={Layout}/>
         <Match pattern="/test/:id" component={ Child }/>
       </div>
-  );
+    );
 };
 
-const Child = ({params}) => {
-  return (
-      <div>
+const Child = ({ params }) => {
+    return (
+        <div>
         <h3>ID: {params.id}</h3>
       </div>
-  );
+    );
 };
 
 

@@ -1,5 +1,3 @@
-import './style.css';
-
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './app';
@@ -15,16 +13,7 @@ ReactDOM.render(
       </BrowserRouter>
     </AppContainer>, rootEl);
 
-
-console.log('... 4');
-
 if (module.hot) {
-    // document.querySelectorAll('link[href][rel=stylesheet]').forEach((link) => {
-    //     console.log(link);
-    //     const nextStyleHref = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`);
-    //     link.href = nextStyleHref;
-    // });
-
     const reporter = window.__webpack_hot_middleware_reporter__;
     const success = reporter.success;
     reporter.success = function() {

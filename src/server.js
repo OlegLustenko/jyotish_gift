@@ -1,9 +1,8 @@
 'use strict';
 require('babel-polyfill');
 require('babel-register')({
-  extensions: [".es6", ".es", ".jsx", ".js"]
+  extensions: [".js"]
 });
-//require('css-modules-require-hook/preset');
 
 require.extensions['.css'] = () => {
  return;
