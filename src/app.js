@@ -8,9 +8,9 @@ import Html from './components/Html';
 const ParamsExample = () => {
   return (
       <div>
-        <h2>Accounts</h2>
+        <h2>Accounts </h2>
         <ul>
-          <li className="test"><Link to="/jyotish">Jyotish 0</Link></li>
+          <li className="test"><Link to="/jyotish">Jyotish 2</Link></li>
           <li><Link to="/gift">Gift</Link></li>
           <li><Link to="/Oleg">Oleg</Link></li>
           <li><Link to="/Astrology">Astrology</Link></li>

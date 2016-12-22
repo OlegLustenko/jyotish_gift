@@ -14,7 +14,7 @@ export default [{
   },
   output: {
     path: path.resolve('dist'),
-    publicPath: '/js/',
+    publicPath: '/src/',
     filename: '[name].js',
     //chunkFilename: '[name].js'
     // library: '[name]'
@@ -33,13 +33,13 @@ export default [{
     new webpack.HotModuleReplacementPlugin(),
     
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor-min.js'}),
-    new ExtractTextPlugin({
-      //filename: "css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]",
-      filename: "css/[name].css",
+   new ExtractTextPlugin({
+      filename: "styles.css",
+      // filename: "css/[name].css",
       disable: false,
       allChunks: true
     }),
-    //new ExtractTextPlugin("styles.css"),
+    // new ExtractTextPlugin("styles.css"),
     //new ExtractTextPlugin('app.css', {
     //  allChunks: true
     //}),
@@ -102,65 +102,67 @@ export default [{
       // }
     ]
   }
-}, {
-  entry: {
-    server: './src/server.js',
-  },
+}, 
+// {
+//   entry: {
+//     server: './src/server.js'
+//   },
   
-  output: {
-    filename: 'dist/server.js',
-    libraryTarget: 'commonjs2',
-  },
+//   output: {
+//     filename: 'dist/server.js',
+//     libraryTarget: 'commonjs2'
+//   },
   
-  target: 'node',
+//   target: 'node',
   
-  externals: [
-    /^\.\/assets$/,
-    (context, request, callback) => {
-      const isExternal =
-          request.match(/^[@a-z][a-z/.\-0-9]*$/i) && !request.match(/\.(css|less|scss|sss)$/i);
-      callback(null, Boolean(isExternal));
-    },
-  ],
+//   externals: [
+//     /^\.\/assets$/,
+//     (context, request, callback) => {
+//       const isExternal =
+//           request.match(/^[@a-z][a-z/.\-0-9]*$/i) && !request.match(/\.(css|less|scss|sss)$/i);
+//       callback(null, Boolean(isExternal));
+//     },
+//   ],
   
-  plugins: [
-    // Define free variables
-    // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
-      'process.env.BROWSER': false,
-      __DEV__: isDebug,
-    }),
-    new webpack.IgnorePlugin(/\.(css|less)$/),
+//   plugins: [
+//     // Define free variables
+//     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+//     new webpack.DefinePlugin({
+//       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+//       'process.env.BROWSER': false,
+//       __DEV__: isDebug,
+//     }),
+//     new webpack.IgnorePlugin(/\.(css|less)$/),
     
-    // Do not create separate chunks of the server bundle
-    // https://webpack.github.io/docs/list-of-plugins.html#limitchunkcountplugin
-    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
+//     // Do not create separate chunks of the server bundle
+//     // https://webpack.github.io/docs/list-of-plugins.html#limitchunkcountplugin
+//     new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
     
-    // Adds a banner to the top of each generated chunk
-    // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
-    new webpack.BannerPlugin({
-      raw: true,
-      banner: 'require("source-map-support").install();',
-    }),
-  ],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-      //include: path.resolve(config.projectRoot, 'src')
-    }]
-  },
+//     // Adds a banner to the top of each generated chunk
+//     // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
+//     new webpack.BannerPlugin({
+//       raw: true,
+//       banner: 'require("source-map-support").install();',
+//     }),
+//   ],
+//   module: {
+//     loaders: [{
+//       test: /\.js$/,
+//       loader: 'babel-loader',
+//       exclude: /node_modules/,
+//       //include: path.resolve(config.projectRoot, 'src')
+//     }]
+//   },
   
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
-  },
+//   node: {
+//     console: false,
+//     global: false,
+//     process: false,
+//     Buffer: false,
+//     __filename: false,
+//     __dirname: false,
+//   },
   
-  devtool: isDebug ? 'cheap-module-source-map' : 'source-map',
-}];
+//   devtool: isDebug ? 'cheap-module-source-map' : 'source-map',
+// }
+];

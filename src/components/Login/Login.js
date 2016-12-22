@@ -13,8 +13,8 @@ export default class Login extends Component {
   }
   
   handleSubmit(e) {
-    e.preventDefault();
-    console.log(e);
+    e.preventDefault();   
+    
   }
   
   handleChange(event) {
@@ -23,8 +23,9 @@ export default class Login extends Component {
   }
   
   render() {
+    // console.log(LoginStyle);
     return (
-        <form onSubmit={this.handleSubmit} className="login">
+        <form onSubmit={this.handleSubmit} className='login'>
           <label htmlFor="login">ENTER LOGIN AND PASSWORD 2</label>
           <input id="login" placeholder="enter your login" type="text" value={this.state.login}
                  onChange={this.handleChange} />

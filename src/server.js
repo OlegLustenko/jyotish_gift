@@ -1,18 +1,15 @@
 'use strict';
-
-// if (!process.env.TRACE) {
-//   require('./server/libs/trace');
-// }
-//require('babel-register');
+require('babel-polyfill');
+require('babel-register')({
+  extensions: [".es6", ".es", ".jsx", ".js"]
+});
 //require('css-modules-require-hook/preset');
 
-//require.extensions['.css'] = () => {
-//  return;
-//};
+require.extensions['.css'] = () => {
+ return;
+};
 
-//require.extensions['.css'] = () => {
-//  return;
-//};
+
 import debug from 'debug';
 import Koa from 'koa';
 import fs from 'fs';
@@ -26,9 +23,8 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import { join } from 'path';
 import React from 'react';
-import App from './app';
 import { AppContainer } from 'react-hot-loader';
-
+console.log('qqqqq');
 
 (async() => {
   await connectDatabase()
@@ -44,16 +40,17 @@ handlers.forEach(handler => {
 app.use(api());
 
 app.use(async(ctx, next) => {
-  
+let App = require('./app').default;
+//  console.log(App);/
   const context = createServerRenderContext();
   let htmlMarkup = (content) => `<html>
    <head>
-      <link rel="stylesheet" href="css/app.css">
+      <link rel="stylesheet" href="src/styles.css">
     </head>
     <body class="xxx">
     <div id="app">${content}</div>  
-    <script src="js/vendor-min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="src/vendor-min.js"></script>
+    <script src="src/app.js"></script>
   </body>
   </html>
 `;
