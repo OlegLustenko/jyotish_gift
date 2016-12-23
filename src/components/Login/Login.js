@@ -14,7 +14,7 @@ export default class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('submit')
+        console.log('submit');
 
     }
 
