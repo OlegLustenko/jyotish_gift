@@ -15,11 +15,10 @@ const ParamsExample = () => {
           <li><Link to="/Oleg">Oleg</Link></li>
           <li><Link to="/Astrology">Astrology</Link></li>
           <li><Link to="/login">Test Login</Link></li>
-        </ul>
-        
+        </ul>        
         
         <Match pattern="/login" component={Layout}/>
-        <Match pattern="/test/:id" component={ Child }/>
+        <Match pattern="/:id" component={ Child }/>
       </div>
     );
 };

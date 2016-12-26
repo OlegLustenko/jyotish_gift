@@ -3,11 +3,10 @@ import path from 'path';
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin, { extract } from 'extract-text-webpack-plugin';
-// import postcssImport from 'postcss-import';
+
 const PUBLICPATH = '/src/';
 const isDebug = true;
 export default [{
-        // context: __dirname + '/src',
         entry: {
             app: ['react-hot-loader/patch', 'webpack-hot-middleware/client', './src/client'],
             vendor: ['react-hot-loader/patch', 'webpack-hot-middleware/client', 'react', 'react-dom', 'react-router']
@@ -16,18 +15,11 @@ export default [{
             path: path.resolve('dist'),
             publicPath: PUBLICPATH,
             filename: '[name].js',
-            //chunkFilename: '[name].js'
-            // library: '[name]'
         },
         resolve: {},
 
         resolveLoader: {},
-        //devServer: {
-        //  hot: true,
-        //  historyApiFallback: true,
-        //  proxy: 3000,
-        //  port: 3001
-        //},
+
         plugins: [
             new webpack.NoErrorsPlugin(),
             new webpack.HotModuleReplacementPlugin(),
@@ -35,21 +27,14 @@ export default [{
             new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-min.js' }),
             new ExtractTextPlugin({
                 filename: "styles.css",
-                // filename: "css/[name].css",
                 disable: false,
                 allChunks: true
             }),
-            // new ExtractTextPlugin("styles.css"),
-            //new ExtractTextPlugin('app.css', {
-            //  allChunks: true
-            //}),
+
             new webpack.LoaderOptionsPlugin({
                 options: {
                     context: __dirname,
-                    postcss: [
-                        require("postcss-cssnext")
-                    ]
-
+                    postcss: [require("postcss-cssnext")]
                 }
             })
         ],
@@ -78,30 +63,8 @@ export default [{
                         ],
                         publicPath: PUBLICPATH
                     }),
-                    // options: {
-                    //   postcss: (wp) => [require("postcss-cssnext")()]
-                    // }
                 },
-                // {
-                //   test: /\.css$/,
-                //   use: [
-                //     'style-loader', 'css-loader', 'postcss-loader'
-                //   ],
-                //   // loader: "style-loader!css-loader!postcss-loader",
-                //   options: {
-                //     postcss: (wp) => [require("postcss-cssnext")()]
-                //   }
-                // }
-                // use: [
 
-                //   { loader: 'style' },
-                //   { loader: 'css' },
-                //   { loader: 'postcss' }
-                // ],
-                // options: {
-                //   postcss: (wp) => [postcssImport({ addDependencyTo: wp }), precss, autoprefixer]
-                // }
-                // }
             ]
         }
     },
