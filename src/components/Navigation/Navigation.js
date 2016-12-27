@@ -1,29 +1,36 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Login from '../Login';
+import Match from 'react-router/Match';
+import Link from 'react-router/Link';
+import './Navigation.css';
 
 class Navigation extends Component {
-  constructor(){
+  constructor() {
     super()
   }
-  render(){
+  render() {
     return (
-      <nav className="navbar navbar-light bg-faded">
-        <ul className="nav navbar-nav">
-          <li className="nav-item">
-            <Link to="/">Home
-            </Link>
+      <div>
+        <nav className="header__nav">
+          <a className="nav__logo">
+            <Link to="/jyotish">Jyotish Gift</Link>
+          </a>
+          <li className="nav__logo-item">
+            <Link to="/gift">Gift 3</Link>
           </li>
-          <li className="nav-item">
-            <Link to="profile">Profile</Link>
+          <li className="nav__logo-item">
+            <Link to="/Oleg">Oleg</Link>
           </li>
-          <li className="nav-item">
-            <Link to="login">Login</Link>
+          <li className="nav__logo-item">
+            <Link to="/Astrology">Astrology</Link>
           </li>
-          <li className="nav-item">
-            <Link to="logout">Logout</Link>
+          <li className="nav__logo-item">
+            <Link to="/login">Test Login</Link>
           </li>
-        </ul>
-        {/*<Loader/>*/}
-      </nav>
+        </nav>
+        <Match pattern="/login" component={Login} />
+        <Match pattern="/jyotish" component={Login} />
+      </div>
     )
   }
 }

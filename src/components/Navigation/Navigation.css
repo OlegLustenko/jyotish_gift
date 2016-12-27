@@ -1,0 +1,19 @@
+.header__nav {
+  display:flex;
+  flex-direction: row;
+}
+
+.nav__logo {
+  display: flex;
+  flex:1 1 auto;
+  border:2px solid;
+  align-items: center;
+  justify-content: center;
+  &-item {
+    justify-content: center;
+    border:2px solid;
+    display: flex;
+    flex:1 1 auto;
+    background: mediumaquamarine;
+  }
+}
