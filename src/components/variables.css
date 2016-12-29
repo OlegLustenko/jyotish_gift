@@ -1,3 +1,4 @@
+
 :root {
   /*
    * Typography
@@ -21,8 +22,9 @@
   --screen-lg-min: 1200px; /* Large screen / wide desktop */
 }
 
-.container {
+.layout {
   max-width: var(--screen-lg-min);
   display: flex;
-  margin: auto;
+  margin: 0 auto;
+  flex-direction: column;
 }

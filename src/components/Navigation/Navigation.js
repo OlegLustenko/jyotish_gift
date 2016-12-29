@@ -6,15 +6,13 @@ import './Navigation.css';
 
 class Navigation extends Component {
   constructor() {
-    super()
+    super();
   }
-  render() {
+  render(): any {
     return (
       <div>
         <nav className="header__nav">
-          <a className="nav__logo">
-            <Link to="/jyotish">Jyotish Gift</Link>
-          </a>
+          <Link to="/jyotish" className="nav__logo">Jyotish Gift</Link>
           <li className="nav__logo-item">
             <Link to="/gift">Gift 3</Link>
           </li>
@@ -28,11 +26,10 @@ class Navigation extends Component {
             <Link to="/login">Test Login</Link>
           </li>
         </nav>
-        <Match pattern="/login" component={Login} />
-        <Match pattern="/jyotish" component={Login} />
+
       </div>
     )
   }
 }
 
-export default Navigation
+export default Navigation;

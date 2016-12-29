@@ -5,7 +5,7 @@ require('babel-register')({
 });
 
 require.extensions['.css'] = () => {
- return;
+  return;
 };
 
 
@@ -25,7 +25,7 @@ import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 console.log('qqqqq');
 
-(async() => {
+(async () => {
   await connectDatabase()
 })();
 const app = new Koa();
@@ -38,9 +38,9 @@ handlers.forEach(handler => {
 });
 app.use(api());
 
-app.use(async(ctx, next) => {
-let App = require('./app').default;
-//  console.log(App);/
+app.use(async (ctx, next) => {
+  let App = require('./app').default;
+  //  console.log(App);/
   const context = createServerRenderContext();
   let htmlMarkup = (content) => `<html>
    <head>
@@ -55,29 +55,29 @@ let App = require('./app').default;
 `;
   // render the first time
   let markup = renderToStaticMarkup(
-      <ServerRouter location={ctx.url} context={context}>
-        <App />
-      </ServerRouter>
+    <ServerRouter location={ctx.url} context={context}>
+      <App />
+    </ServerRouter>
   );
-  
+
   const result = context.getResult();
-  
+
   // the result will tell you if it redirected, if so, we ignore
   // the markup and send a proper redirect.
-  if ( result.redirect ) {
+  if (result.redirect) {
     ctx.redirect(result.redirect.pathname);
     await next();
   } else {
-    
+
     // the result will tell you if there were any misses, if so
     // we can send a 404 and then do a second render pass with
     // the context to clue the <Miss> components into rendering
     // this time (on the client they know from componentDidMount)
-    if ( result.missed ) {
+    if (result.missed) {
       markup = renderToStaticMarkup(
-          <ServerRouter location={ctx.url} context={context}>
-            <App />
-          </ServerRouter>
+        <ServerRouter location={ctx.url} context={context}>
+          <App />
+        </ServerRouter>
       )
     }
     ctx.type = 'text/html; charset=utf-8';

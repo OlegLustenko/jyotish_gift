@@ -1,19 +1,25 @@
 .header__nav {
-  display:flex;
+  display: flex;
   flex-direction: row;
+  flex:1;
 }
 
 .nav__logo {
   display: flex;
-  flex:1 1 auto;
-  border:2px solid;
+  flex: 1 1 auto;
+  border: 1px solid;
   align-items: center;
   justify-content: center;
+  border-right: 0;
   &-item {
     justify-content: center;
-    border:2px solid;
+    border: 1px solid;
     display: flex;
-    flex:1 1 auto;
+    flex: 1 1 auto;   
     background: mediumaquamarine;
+    padding: 0.8rem 0 0.8rem 0;
+    &:not(:last-child){
+       border-right: 0;
+    }
   }
 }
