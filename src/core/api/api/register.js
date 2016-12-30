@@ -6,7 +6,7 @@ import { User } from '../../models';
 //@@ password
 export default (router) => {
   router
-    .post('/user/register', async(ctx, next) => {
+    .post('/user/register', async (ctx, next) => {
       // let user;
       let {...req } = ctx.request.body;
       let user = await User.find(req)
@@ -18,10 +18,11 @@ export default (router) => {
       ctx.body = user;
       await next();
     })
-    .get('/users', async(ctx, next) => {
+    .get('/users', async (ctx, next) => {
 
       let users = await User.find({})
-        .lean();
+             .lean();
+             console.log(users[0]['password']);
       ctx.body = users;
       await next();
     })

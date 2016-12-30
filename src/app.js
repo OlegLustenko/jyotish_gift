@@ -7,7 +7,7 @@ import Html from './components/Html';
 
 const ParamsExample = () => {
   return (
-    <Layout>     
+    <Layout>
     </Layout>
   );
 };

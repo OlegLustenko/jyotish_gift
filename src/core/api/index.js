@@ -6,12 +6,12 @@ import importDir from 'import-dir';
 import compose from 'koa-compose';
 
 const routerConfig = [{
-    folder: 'base',
-    prefix: 'test'
-  }, {
-    folder: 'api',
-    prefix: '/api'
-  },
+  folder: 'base',
+  prefix: 'test'
+}, {
+  folder: 'api',
+  prefix: '/api'
+}
   // { folder: 'login', prefix: '/login' }
 ];
 export default function routes() {
@@ -26,7 +26,7 @@ export default function routes() {
 
     return [
       router.routes(),
-      // router.allowedMethods(),
+      router.allowedMethods(),
       ...prev
     ];
   }, []);
