@@ -23,10 +23,9 @@ export default class Login extends Component {
         console.log(JSON.stringify(this.state.user));
         fetch('/api/auth/login', {
             method: 'POST',
-            body: this.state.user,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            body: JSON.stringify(this.state.user),
+            headers: {         
+                'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(x => {
             console.log(x);
