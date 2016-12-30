@@ -1,7 +1,7 @@
 // @flow;
 import React, { Component } from 'react';
 import Navigation from '../Navigation';
-import './Header.css'
+import './Header.css';
 
 class Header extends Component {
   render(): JSX.Element {

@@ -39,7 +39,10 @@ handlers.forEach(handler => {
 app.use(api());
 
 app.use(async (ctx, next) => {
+<<<<<<< HEAD
   if (ctx.request.url.slice(1, 4) === 'api') return await next();
+=======
+>>>>>>> de8d3cae42aad2a7e725aab36c7b1cd871f92614
   let App = require('./app').default;
   //  console.log(App);/
   const context = createServerRenderContext();
@@ -69,6 +72,10 @@ app.use(async (ctx, next) => {
     ctx.redirect(result.redirect.pathname);
     await next();
   } else {
+<<<<<<< HEAD
+=======
+
+>>>>>>> de8d3cae42aad2a7e725aab36c7b1cd871f92614
     // the result will tell you if there were any misses, if so
     // we can send a 404 and then do a second render pass with
     // the context to clue the <Miss> components into rendering

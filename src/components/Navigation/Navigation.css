@@ -1,19 +1,40 @@
 .header__nav {
-  display:flex;
-  flex-direction: row;
+  // float:left;
+  // display: flex;
+  // flex-direction: row;
+  // flex:1;
+  // justify-content: space-between;
 }
 
 .nav__logo {
-  display: flex;
-  flex:1 1 auto;
-  border:2px solid;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+     float:left;
+  
+    // justify-content: center;
+    border: 1px solid;
+    // display: flex;
+    flex: 1 1 auto;   
+    background: #2196F3;  
+    padding: 0.8rem 0 0.8rem 0;
+    color:#fff;
+ 
   &-item {
-    justify-content: center;
-    border:2px solid;
-    display: flex;
-    flex:1 1 auto;
-    background: mediumaquamarine;
+     display: inline-block;
+     float:right;
+  
+    // justify-content: center;
+    border: 1px solid;
+    // display: flex;
+    flex: 1 1 auto;   
+    background: #2196F3;  
+    padding: 0.8rem 0 0.8rem 0;
+    color:#fff;
+    &:not(:last-child){
+       border-right: 0;
+       color:#fff;
+    }
+    & > a {
+      color:#fff;
+    }
   }
 }
