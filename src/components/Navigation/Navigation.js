@@ -4,30 +4,28 @@ import Match from 'react-router/Match';
 import Link from 'react-router/Link';
 import './Navigation.css';
 
+const Logo = (): void => (
+  <li className="nav__logo">
+    <Link to="/jyotish">Jyotish Gift</Link>
+  </li>
+)
+
 class Navigation extends Component {
   constructor() {
     super();
   }
   render(): any {
     return (
-      <div>
-        <nav className="header__nav">
-          <Link to="/jyotish" className="nav__logo">Jyotish Gift</Link>
-          <li className="nav__logo-item">
-            <Link to="/gift">Gift 3</Link>
-          </li>
-          <li className="nav__logo-item">
-            <Link to="/Oleg">Oleg</Link>
-          </li>
-          <li className="nav__logo-item">
-            <Link to="/Astrology">Astrology</Link>
-          </li>
-          <li className="nav__logo-item">
-            <Link to="/login">Test Login</Link>
-          </li>
-        </nav>
+      <nav className="header__nav">
+        <Logo />
+        <li className="nav__logo-item">
+          <Link to="/Astrology">Консультации</Link>
+        </li>
+        <li className="nav__logo-item">
+          <Link to="/login">Login</Link>
+        </li>
+      </nav>
 
-      </div>
     )
   }
 }

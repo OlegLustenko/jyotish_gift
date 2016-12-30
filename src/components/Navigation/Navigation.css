@@ -1,25 +1,40 @@
 .header__nav {
-  display: flex;
-  flex-direction: row;
-  flex:1;
+  // float:left;
+  // display: flex;
+  // flex-direction: row;
+  // flex:1;
+  // justify-content: space-between;
 }
 
 .nav__logo {
-  display: flex;
-  flex: 1 1 auto;
-  border: 1px solid;
-  align-items: center;
-  justify-content: center;
-  border-right: 0;
-  &-item {
-    justify-content: center;
+  display: inline-block;
+     float:left;
+  
+    // justify-content: center;
     border: 1px solid;
-    display: flex;
+    // display: flex;
     flex: 1 1 auto;   
-    background: mediumaquamarine;
+    background: #2196F3;  
     padding: 0.8rem 0 0.8rem 0;
+    color:#fff;
+ 
+  &-item {
+     display: inline-block;
+     float:right;
+  
+    // justify-content: center;
+    border: 1px solid;
+    // display: flex;
+    flex: 1 1 auto;   
+    background: #2196F3;  
+    padding: 0.8rem 0 0.8rem 0;
+    color:#fff;
     &:not(:last-child){
        border-right: 0;
+       color:#fff;
+    }
+    & > a {
+      color:#fff;
     }
   }
 }
