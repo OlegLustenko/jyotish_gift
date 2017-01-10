@@ -1,7 +1,7 @@
 'use strict';
 require('babel-polyfill');
 require('babel-register')({
-  extensions: [".js"]
+  extensions: ['.js']
 });
 
 require.extensions['.css'] = () => {
@@ -23,7 +23,6 @@ import { ServerRouter, createServerRenderContext } from 'react-router'
 import { join } from 'path';
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
-console.log('qqqqq');
 
 (async () => {
   await connectDatabase()
