@@ -32,12 +32,14 @@ app.keys = config.keys;
 app.use(middlewares());
 
 let handlers = fs.readdirSync(join(__dirname, 'core/handlers'));
-handlers.forEach(handler => {
+handlers.forEach((handler: string) => {
   app.use(require('./core/handlers/' + handler)[handler]())
 });
 app.use(api());
 
-app.use(async (ctx, next) => {
+app.use(async (ctx: Koa.Context, next: Promise<any>) => {
+  if (ctx.request.url.slice(1, 4) === 'api') return await next();
+
   let App = require('./app').default;
   //  console.log(App);/
   const context = createServerRenderContext();
@@ -54,9 +56,11 @@ app.use(async (ctx, next) => {
 `;
   // render the first time
   let markup = renderToStaticMarkup(
-    <ServerRouter location={ctx.url} context={context}>
-      <App />
-    </ServerRouter>
+    <AppContainer>
+      <ServerRouter location={ctx.url} context={context}>
+        <App />
+      </ServerRouter>
+    </AppContainer>
   );
 
   const result = context.getResult();
@@ -67,7 +71,6 @@ app.use(async (ctx, next) => {
     ctx.redirect(result.redirect.pathname);
     await next();
   } else {
-
     // the result will tell you if there were any misses, if so
     // we can send a 404 and then do a second render pass with
     // the context to clue the <Miss> components into rendering

@@ -28,7 +28,7 @@
 }
 
 .layout {
-  max-width: var(--screen-lg-min);
+  max-width: var(--screen-md-min);
   display: flex;
   margin: 0 auto;
   flex-direction: column;

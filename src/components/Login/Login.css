@@ -1,6 +1,6 @@
 .login {
   background: green;
   &__client {
-    background: blue;
+    // background: blue;
   }
 }

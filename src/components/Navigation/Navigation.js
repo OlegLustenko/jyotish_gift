@@ -25,7 +25,6 @@ class Navigation extends Component {
           <Link to="/login">Login</Link>
         </li>
       </nav>
-
     )
   }
 }

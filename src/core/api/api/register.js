@@ -23,6 +23,7 @@ export default (router) => {
 
       let users = await User.find({})
         .lean();
+      console.log(users[0]['password']);
       ctx.body = users;
       await next();
     })
